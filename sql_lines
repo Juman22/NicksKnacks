@@ -1,0 +1,30 @@
+final String DRIVE_NAME = "com.mysql.jdbc.Driver"; 
+		final String ConnectionURL = "jdbc:mysql://localhost:3306/store"; 
+
+sqlStatements = "SELECT * FROM store.products;"; 
+				results = statementMain.executeQuery(sqlStatements);
+        
+        
+while(results.next()){ 
+								int sku = results.getInt("sku"); 
+								int price = results.getInt("price"); 
+								String name = results.getString("name"); 
+								String description = results.getString("description"); 
+								String imageLink = results.getString("image");
+								String list = "<li class=\"list-group-item\" value=" +sku + ">";
+								writeOut.println(list); 
+								writeOut.println("<div class=\"simpleCart_shelfItem\">");
+								writeOut.println("<div class=\"view view-first\">\n"
+										+ "<div class=\"inner_content clearfix\">");
+								writeOut.println("<div class=\"product_container\">");
+								writeOut.println("<div class=\"product_image\">");
+								writeOut.println("<img src=\"" +imageLink +  "\" class=\"img-responsive\" alt=\" \"/>");
+								writeOut.println("<p class=\"title\"><a href=\"product.html\">" + name + "</a></p>"); 
+								writeOut.println("<div class=\"pricey\">$" + price + "</div>");
+								writeOut.println("<p>" + sku + "</p>");
+								writeOut.println("</div>");
+								writeOut.println("</div>");
+								writeOut.println("</div>");
+								writeOut.println("</div>");
+								writeOut.println("</li>");
+						}
