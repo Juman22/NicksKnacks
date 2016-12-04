@@ -1,24 +1,14 @@
 public class Account {
-	int id;
 	String username;
 	String password;
 	String firstName;
 	String lastName;
 	
-	public Account(int id, String username,	String password, String firstName, String lastName) {
-		this.id = id;
+	public Account(String username,	String password, String firstName, String lastName) {
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getUsername() {

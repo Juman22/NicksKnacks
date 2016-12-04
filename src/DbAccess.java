@@ -8,7 +8,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-//DbAccess class contains methods for retrieving ResultSets
+//DbAccess class contains methods for retrieving lists from resultsets
+//The DbAccess class will never be accessed by the Servlet
+
 public class DbAccess {
 	
 	public Connection connect() {
@@ -36,11 +38,9 @@ public class DbAccess {
 	}
 
 	public void disconnect(Connection con) {
-		// TODO Auto-generated method stub
 		try {
 			con.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -84,6 +84,7 @@ public class DbAccess {
 		 }
 	}
 	
+	//Generic method that pulls a list from any ResultSet
 	public List<Product> getListFromResults(ResultSet rs) throws SQLException {
 		List<Product> prodList = new ArrayList<Product>();
 
@@ -199,7 +200,7 @@ public class DbAccess {
 	public Account parseAccount(ResultSet rs) {
 		try {
 			while(rs.next()) {
-				return new Account(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("First Name"), rs.getString("Last Name"));
+				return new Account(rs.getString("username"), rs.getString("password"), rs.getString("First Name"), rs.getString("Last Name"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -225,6 +226,27 @@ public class DbAccess {
 		Account acct = parseAccount(rs);
 		disconnect(con);
 		return acct;
+	}
+	
+	public void createAccount(String userName, String pass, String firstName, String lastName) {
+		String query = "INSERT INTO ACCOUNTS (username, password, First Name, Last Name) VALUES ('";
+		query += userName;
+		query += "', '";
+		
+		query += pass;
+		query += "', '";
+		
+		query += firstName;
+		query += "', '";
+		
+		query += lastName;
+		query += "')";
+		
+		Connection con = connect();
+		
+		create(con, query);
+		
+		disconnect(con);
 	}
 	
 }

@@ -77,8 +77,27 @@ public class DbConnector extends HttpServlet {
     }
     
     void displayAccount(HttpServletRequest request, HttpServletResponse response, Account acct) {
-    	//Need params to finish this method
-    	//TODO
+		Template template = null;
+		DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
+		SimpleHash root = new SimpleHash(df.build());
+		
+		root.put("account", acct);
+		
+		try {
+			String templateName = "shop.ftl";
+			template = cfg.getTemplate(templateName);
+			response.setContentType("text/html");
+			PrintWriter out = response.getWriter();
+			template.process(root, out);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			
+		} catch (TemplateException e) {
+			e.printStackTrace();
+			
+		}
+    	
     }
     
 	protected  void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -109,11 +128,20 @@ public class DbConnector extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Used for account retrieval
-		String userName = request.getParameter("username");
+		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		
+		//Used for account creation
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+
+		DbInterface db = new DbInterface();
+
+		if(firstName != null) {
+			db.createAccount(userName, password, firstName, lastName);
+		}
+		
 		if(userName != "" && password != null) {
-			DbInterface db = new DbInterface();
 			Account acct = db.getAccount(userName, password);
 			
 			if(acct != null)

@@ -43,4 +43,13 @@ public class DbInterface {
 		DbAccess db = new DbAccess();	
 		db.reduceProductQuantity(id, amt);
 	}
+	
+	public Account createAccount(String userName, String pass, String firstName, String lastName) {
+		Account acct = new Account(userName, pass, firstName, lastName);	
+		
+		DbAccess db = new DbAccess();
+		db.createAccount(userName, pass, firstName, lastName);
+		
+		return acct;
+	}
 }
