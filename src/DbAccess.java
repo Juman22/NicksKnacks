@@ -130,6 +130,24 @@ public class DbAccess {
 		}
 	}
 	
+	public List<Product> getProductsByName(String name, int min, int max){
+		String query = "SELECT * FROM PRODUCTS WHERE NAME LIKE " + name;
+		query += " PRICE BETWEEN " + min + " AND " + max;
+		Connection con = connect();
+		
+		ResultSet rs = retrieve(con, query);
+		disconnect(con);
+
+		try {
+			return getListFromResults(rs);
+			
+		} catch (SQLException e) {
+			disconnect(con);
+			return null;
+			
+		}
+	}
+	
 	public List<Product> getProductsBySku(String sku){
 		String query = "SELECT * FROM PRODUCTS WHERE SKU = " + sku;
 		Connection con = connect();
@@ -146,9 +164,25 @@ public class DbAccess {
 		}
 	}
 	
+	public List<Product> getTopProducts() {
+		String query = "SELECT * FROM PRODUCTS LIMIT 40";
+		Connection con = connect();
+		
+		ResultSet rs = retrieve(con, query);
+		disconnect(con);
+		
+		try {
+			return getListFromResults(rs);
+			
+		} catch (SQLException e) {
+			return null;
+			
+		}
+	}
+	
 	public void reduceProductQuantity(int id, int amt) {
 		String query = "UPDATE PRODUCTS SET QUANTITY = QUANTITY - " + amt;
-		query += " WHERE id = " + id + " AND QUANTITY > 0";
+		query += " WHERE ID = " + id + " AND QUANTITY > 0";
 		
 		Connection con = connect();
 		
