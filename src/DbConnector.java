@@ -76,6 +76,11 @@ public class DbConnector extends HttpServlet {
     	}
     }
     
+    void displayAccount(HttpServletRequest request, HttpServletResponse response, Account acct) {
+    	//Need params to finish this method
+    	//TODO
+    }
+    
 	protected  void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//The actual name of these variables may change, not sure yet
 		//Need actual html page to get accurate names
@@ -103,7 +108,17 @@ public class DbConnector extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		//Used for account retrieval
+		String userName = request.getParameter("username");
+		String password = request.getParameter("password");
+		
+		if(userName != "" && password != null) {
+			DbInterface db = new DbInterface();
+			Account acct = db.getAccount(userName, password);
+			
+			if(acct != null)
+				displayAccount(request, response, acct);
+		}
 	}
 
 }

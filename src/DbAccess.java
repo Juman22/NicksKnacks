@@ -195,4 +195,36 @@ public class DbAccess {
 		update(con, query);
 	}
 	
+	//parses a result set for a new account object
+	public Account parseAccount(ResultSet rs) {
+		try {
+			while(rs.next()) {
+				return new Account(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("First Name"), rs.getString("Last Name"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	public Account getAccount(String name, String pass) throws SQLException {
+		//Username
+		String query = "SELECT * FROM ACCOUNTS WHERE USERNAME = '";
+		query += name + "'";
+		
+		//Password
+		query += " AND PASSWORD = '";
+		query += pass + "'";
+		
+		Connection con = connect();
+		
+		ResultSet rs = retrieve(con, query);
+		
+		
+		Account acct = parseAccount(rs);
+		disconnect(con);
+		return acct;
+	}
+	
 }

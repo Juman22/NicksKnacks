@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,17 @@ public class DbInterface {
 	public List<Product> getProducts() {
 		DbAccess db = new DbAccess();
 		return db.getTopProducts();
+	}
+	
+	public Account getAccount(String name, String pass) {
+		DbAccess db = new DbAccess();
+		
+		try {
+			return db.getAccount(name, pass);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public void reduceProduct(int id, int amt) {
