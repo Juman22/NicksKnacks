@@ -96,7 +96,7 @@
 			</div>
 		</#if>
             <!-- /.productbox -->
-	</#else>
+	<#else>
 		<h3>No products were found</h3>
     </#list>
 </div>

@@ -10,10 +10,9 @@ public class DbInterface {
 		DbAccess db = new DbAccess();
 		
 		if(name != "" && min < 0) {
-			rs = db.getProductsByName(name);	
-			
+			rs = db.getProductsByName(name);			
 		}
-		else if(name == "") {
+		else if(name == "" && min > 0) {
 			rs = db.getProductsByPriceRange(min, max);
 		} 
 		else {
@@ -24,7 +23,7 @@ public class DbInterface {
 	}
 	
 	public List<Product> getProducts() {
-		DbAccess db = new DbAccess();	
+		DbAccess db = new DbAccess();
 		return db.getTopProducts();
 	}
 	

@@ -71,7 +71,6 @@ public class DbAccess {
 
 	
 	public int update(Connection con, String query) {
-		//TODO
 		try 
 		 {  
 			Statement statement = con.createStatement();
@@ -89,7 +88,7 @@ public class DbAccess {
 		List<Product> prodList = new ArrayList<Product>();
 
 		while(rs.next()) {
-			Product p = new Product(rs.getInt("od"),rs.getInt("sku"), rs.getString("name"), rs.getString("description"),rs.getInt("quantity"), rs.getString("image"));
+			Product p = new Product(rs.getInt("id"),rs.getInt("sku"), rs.getString("name"), rs.getString("description"),rs.getInt("quantity"), rs.getString("image"));
 			prodList.add(p);
 		}
 		
@@ -101,29 +100,31 @@ public class DbAccess {
 		Connection con = connect();
 		
 		ResultSet rs = retrieve(con, query);
-		disconnect(con);
 
 		try {
-			return getListFromResults(rs);
-			
+			List<Product> prodList = getListFromResults(rs);
+			disconnect(con);
+			return prodList;
 		} catch (SQLException e) {
+			System.out.println(e);
 			disconnect(con);
 			return null;
 			
 		}
 	}
 	
-	public List<Product> getProductsByName(String name){
-		String query = "SELECT * FROM PRODUCTS WHERE NAME LIKE " + name;
+	public List<Product> getProductsByName(String name) {
+		String query = "SELECT * FROM PRODUCTS WHERE NAME LIKE '%" + name + "%'";
 		Connection con = connect();
 		
 		ResultSet rs = retrieve(con, query);
-		disconnect(con);
-
+		
 		try {
-			return getListFromResults(rs);
-			
+			List<Product> prodList = getListFromResults(rs);
+			disconnect(con);
+			return prodList;
 		} catch (SQLException e) {
+			System.out.println(e);
 			disconnect(con);
 			return null;
 			
@@ -131,17 +132,18 @@ public class DbAccess {
 	}
 	
 	public List<Product> getProductsByName(String name, int min, int max){
-		String query = "SELECT * FROM PRODUCTS WHERE NAME LIKE " + name;
+		String query = "SELECT * FROM PRODUCTS WHERE NAME LIKE '%" + name + "%'";
 		query += " PRICE BETWEEN " + min + " AND " + max;
 		Connection con = connect();
 		
 		ResultSet rs = retrieve(con, query);
-		disconnect(con);
 
 		try {
-			return getListFromResults(rs);
-			
+			List<Product> prodList = getListFromResults(rs);
+			disconnect(con);
+			return prodList;
 		} catch (SQLException e) {
+			System.out.println(e);
 			disconnect(con);
 			return null;
 			
@@ -153,12 +155,14 @@ public class DbAccess {
 		Connection con = connect();
 		
 		ResultSet rs = retrieve(con, query);
-		disconnect(con);
 
 		try {
-			return getListFromResults(rs);
-			
+			List<Product> prodList = getListFromResults(rs);
+			disconnect(con);
+			return prodList;
 		} catch (SQLException e) {
+			System.out.println(e);
+			disconnect(con);
 			return null;
 			
 		}
@@ -169,12 +173,14 @@ public class DbAccess {
 		Connection con = connect();
 		
 		ResultSet rs = retrieve(con, query);
-		disconnect(con);
 		
 		try {
-			return getListFromResults(rs);
-			
+			List<Product> prodList = getListFromResults(rs);
+			disconnect(con);
+			return prodList;
 		} catch (SQLException e) {
+			System.out.println(e);
+			disconnect(con);
 			return null;
 			
 		}
