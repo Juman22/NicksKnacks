@@ -85,25 +85,74 @@ public class DbAccess {
 		 }
 	}
 	
-	public List<Product> getProductsByPriceRange(int min, int max){
+	public List<Product> getListFromResults(ResultSet rs) throws SQLException {
 		List<Product> prodList = new ArrayList<Product>();
-		String query = "";
-		Connection con = connect();
-		
-		ResultSet rs = retrieve(con, query);
-		
-		try {
-			while(rs.next()) {
-				Product p = new Product(rs.getInt("od"),rs.getInt("sku"), rs.getString("name"), rs.getString("description"),rs.getInt("quantity"), rs.getString("image"));
-				prodList.add(p);
-			}
-			
-		} catch (SQLException e) {
-			disconnect(con);
-			
+
+		while(rs.next()) {
+			Product p = new Product(rs.getInt("od"),rs.getInt("sku"), rs.getString("name"), rs.getString("description"),rs.getInt("quantity"), rs.getString("image"));
+			prodList.add(p);
 		}
 		
 		return prodList;
+	}
+	
+	public List<Product> getProductsByPriceRange(int min, int max){
+		String query = "SELECT * FROM PRODUCTS WHERE PRICE BETWEEN " + min + " AND " + max;
+		Connection con = connect();
+		
+		ResultSet rs = retrieve(con, query);
+		disconnect(con);
+
+		try {
+			return getListFromResults(rs);
+			
+		} catch (SQLException e) {
+			disconnect(con);
+			return null;
+			
+		}
+	}
+	
+	public List<Product> getProductsByName(String name){
+		String query = "SELECT * FROM PRODUCTS WHERE NAME LIKE " + name;
+		Connection con = connect();
+		
+		ResultSet rs = retrieve(con, query);
+		disconnect(con);
+
+		try {
+			return getListFromResults(rs);
+			
+		} catch (SQLException e) {
+			disconnect(con);
+			return null;
+			
+		}
+	}
+	
+	public List<Product> getProductsBySku(String sku){
+		String query = "SELECT * FROM PRODUCTS WHERE SKU = " + sku;
+		Connection con = connect();
+		
+		ResultSet rs = retrieve(con, query);
+		disconnect(con);
+
+		try {
+			return getListFromResults(rs);
+			
+		} catch (SQLException e) {
+			return null;
+			
+		}
+	}
+	
+	public void reduceProductQuantity(int id, int amt) {
+		String query = "UPDATE PRODUCTS SET QUANTITY = QUANTITY - " + amt;
+		query += " WHERE id = " + id + " AND QUANTITY > 0";
+		
+		Connection con = connect();
+		
+		update(con, query);
 	}
 	
 }
