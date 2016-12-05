@@ -827,3 +827,7 @@ ul,ol {
     margin: auto;
     width: 50%;   
 }
+
+#pricemin, #pricemax {
+    width: 100px;
+}
