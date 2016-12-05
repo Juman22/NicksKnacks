@@ -105,6 +105,9 @@
 	   </div>
 		<div class="row text-center">
             <div class="profile-field container">
+	    	 <div class="profile-field-icon">
+                    <span><img src="images/user.png"></span>
+                </div>
                 <form class="form-horizontal" action="">
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="username">Username:</label>
