@@ -108,39 +108,11 @@
 	    	 <div class="profile-field-icon">
                     <span><img src="images/user.png"></span>
                 </div>
-                <form class="form-horizontal" action="">
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="username">Username:</label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" id="username" value="${account.username}" disabled>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="fn">First Name:</label>
-                        <div class="col-sm-6">          
-                            <input type="text" class="form-control" id="fn" value="${account.firstName}">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="ln">Last Name:</label>
-                        <div class="col-sm-6">          
-                            <input type="text" class="form-control" id="ln" value="${account.lastName}">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="pwd">Password:</label>
-                        <div class="col-sm-6">          
-                            <input type="password" class="form-control" id="pwd" placeholder="Enter current password">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-6">          
-                            <input type="password" class="form-control" id="pwd" placeholder="Enter new password">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-default">Update</button>
-            </form>
-            
+		<div class="acct-info">
+                    <h2>${account.firstName} ${account.lastName}</h2>
+                    <p>Username: ${account.username}</p>
+                </div>
+                
             </div>
             
         </div>
