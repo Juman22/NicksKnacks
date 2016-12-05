@@ -73,6 +73,34 @@
 			</span>
 		</div>
 	</div>
+	
+    <div class="container">
+	<form action="" method="post">
+	    <div class="col-md-4">
+		<b class="propertyname">Filter by:</b>
+		<div class="form-inline row">
+		    <label>Price: $</label>
+		    <input type="number" id="pricemin" name="pricemin" class="form-control" placeholder="Min"> to 
+		    <input type="number" id="pricemax" name="pricemax" class="form-control" placeholder="Max">
+		</div>
+	    </div>
+	    <div class="col-md-4">
+		<b class="propertyname">Sort by:</b>
+		<select name="sort">
+		    <option value="az">None</option>
+		    <option value="az">A - Z</option>
+		    <option value="za">Z - A</option>
+		    <option value="pricelohi">Price Low to High</option>
+		    <option value="pricehilo">Price High to Low</option>
+		</select>
+	    </div>
+	    <div class="col-md-4 form-inline">
+		<input type="text" name="search" class="form-control">
+		<button type="submit" class="btn btn-primary">Search</button> 
+	    </div>
+	</form>
+    </div><br>
+	
     <#list products as product>
 		<#if product?index % 3 == 0>
 			<div class="row">
