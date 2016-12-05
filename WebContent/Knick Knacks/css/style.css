@@ -856,3 +856,8 @@ div.name-box{
 #pricemin, #pricemax {
     width: 100px;
 }
+
+.profile-field-icon{
+    margin-bottom: 50px;   
+}
+
