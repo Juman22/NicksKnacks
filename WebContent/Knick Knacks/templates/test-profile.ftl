@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="">
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="Knick%20Knacks/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
+<link href="Knick%20Knacks/css/style.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,600,700" rel="stylesheet">
 </head>
@@ -109,19 +109,19 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="username">Username:</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="username" value="${username}" disabled>
+                            <input type="text" class="form-control" id="username" value="${account.username}" disabled>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="fn">First Name:</label>
                         <div class="col-sm-6">          
-                            <input type="text" class="form-control" id="fn" value="${firstName}">
+                            <input type="text" class="form-control" id="fn" value="${account.firstName}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-3" for="ln">Last Name:</label>
                         <div class="col-sm-6">          
-                            <input type="text" class="form-control" id="ln" value="${lastName}">
+                            <input type="text" class="form-control" id="ln" value="${account.lastName}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -182,7 +182,7 @@
     
 <!-- SCRIPTS =============================-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/main.js"></script>    
+<script src="Knick%20Knacks/js/bootstrap.min.js"></script>
+<script src="Knick%20Knacks/js/main.js"></script>    
 </body>
 </html>

@@ -127,7 +127,7 @@ public class DbConnector extends HttpServlet {
 		root = addActiveAccount(request, root);
 
 		try {
-			String templateName = "shop.ftl";
+			String templateName = "test-profile.ftl";
 			template = cfg.getTemplate(templateName);
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
@@ -185,12 +185,12 @@ public class DbConnector extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Used for account retrieval
-				String userName = request.getParameter("userName");
+				String userName = request.getParameter("username");
 				String password = request.getParameter("password");
 				
 				//Used for account creation
-				String firstName = request.getParameter("firstName");
-				String lastName = request.getParameter("lastName");
+				String firstName = request.getParameter("firstname");
+				String lastName = request.getParameter("lastname");
 
 				DbInterface db = new DbInterface();
 
