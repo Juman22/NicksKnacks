@@ -1,5 +1,5 @@
 
-import java.io.IOException;  
+import java.io.IOException;   
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import persistLayer.Account;
 import persistLayer.DbInterface;
@@ -61,6 +62,8 @@ public class DbConnector extends HttpServlet {
 			
 			root.put("products", rs);
 			
+			root = addActiveAccount(request, root);
+			
 			try {
 				String templateName = "test-shop.ftl";
 				template = cfg.getTemplate(templateName);
@@ -78,12 +81,25 @@ public class DbConnector extends HttpServlet {
     	}
     }
     
+    //Adds the active account to a hash for freemarker
+    SimpleHash addActiveAccount(HttpServletRequest request, SimpleHash root) {
+    	HttpSession session = request.getSession();
+		Account activeAcct = (Account) session.getAttribute("activeAccount");
+		
+		if(activeAcct != null)
+			root.put("account", activeAcct); 
+		
+		return root;
+    }
+    
     void displayProduct(HttpServletRequest request, HttpServletResponse response, Product p) {
 		Template template = null;
 		DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
 		SimpleHash root = new SimpleHash(df.build());
 		
 		root.put("product", p);
+		
+		root = addActiveAccount(request, root);
 		
 		try {
 			String templateName = "test-product.ftl";
@@ -108,6 +124,8 @@ public class DbConnector extends HttpServlet {
 		
 		root.put("account", acct);
 		
+		root = addActiveAccount(request, root);
+
 		try {
 			String templateName = "shop.ftl";
 			template = cfg.getTemplate(templateName);
@@ -123,6 +141,12 @@ public class DbConnector extends HttpServlet {
 			
 		}
     	
+    }
+    
+    //Sets the session account variable
+    void setSessionAccount(HttpServletRequest request, Account acct) {
+    	HttpSession session = request.getSession();
+    	session.setAttribute("activeAccount", acct);	
     }
     
 	protected  void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -177,8 +201,10 @@ public class DbConnector extends HttpServlet {
 				if(userName != "" && password != null) {
 					Account acct = db.getAccount(userName, password);
 					
-					if(acct != null)
+					if(acct != null) {
+						setSessionAccount(request, acct);
 						displayAccount(request, response, acct);
+					}
 				}
 	}
 
