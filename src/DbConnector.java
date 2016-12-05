@@ -78,6 +78,29 @@ public class DbConnector extends HttpServlet {
     	}
     }
     
+    void displayProduct(HttpServletRequest request, HttpServletResponse response, Product p) {
+		Template template = null;
+		DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
+		SimpleHash root = new SimpleHash(df.build());
+		
+		root.put("product", p);
+		
+		try {
+			String templateName = "test-product.ftl";
+			template = cfg.getTemplate(templateName);
+			response.setContentType("text/html");
+			PrintWriter out = response.getWriter();
+			template.process(root, out);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			
+		} catch (TemplateException e) {
+			e.printStackTrace();
+			
+		}
+    }
+    	
     void displayAccount(HttpServletRequest request, HttpServletResponse response, Account acct) {
 		Template template = null;
 		DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
@@ -108,24 +131,32 @@ public class DbConnector extends HttpServlet {
 		String name = request.getParameter("name");
 		String minPrice = request.getParameter("minPrice");
 		String maxPrice = request.getParameter("maxPrice");
+		String sku = request.getParameter("sku");
 		DbInterface db = new DbInterface();
 		
-		//Parse string params to ints for DbInterface
-		int min = -1, max = -1;
-		if(minPrice != null)
-			min = Integer.parseInt(minPrice);
-		if(maxPrice != null)
-			max = Integer.parseInt(maxPrice);
-		
-		List<Product> rs;
-		if(name == "" && min == -1) {
-			rs = db.getProducts();
+		//If the servlet is provided a sku, it bypasses the search
+		//Otherwise it populates the ftl with a product list
+		if(sku != null) {
+			Product p = db.getProductBySku(sku);
+			displayProduct(request, response, p);
+		} else {
+			//Parse string params to ints for DbInterface
+			int min = -1, max = -1;
+			if(minPrice != null)
+				min = Integer.parseInt(minPrice);
+			if(maxPrice != null)
+				max = Integer.parseInt(maxPrice);
+			
+			List<Product> rs;
+			if(name == "" && min == -1) {
+				rs = db.getProducts();
+			}
+			else {
+				rs = db.getSearchResults(name, min, max);
+			}
+			
+			displayResults(request, response, rs);
 		}
-		else {
-			rs = db.getSearchResults(name, min, max);
-		}
-		
-		displayResults(request, response, rs);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

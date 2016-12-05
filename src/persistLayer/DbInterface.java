@@ -25,6 +25,10 @@ public class DbInterface {
 		return rs;
 	}
 	
+	public Product getProductBySku(String sku) {
+		DbAccess db = new DbAccess();		
+		return db.getProductBySku(sku);
+	}
 	public List<Product> getProducts() {
 		DbAccess db = new DbAccess();
 		return db.getTopProducts();

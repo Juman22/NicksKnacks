@@ -1,20 +1,22 @@
 package persistLayer;
 public class Product {
-	public int id;
-	public int sku;
-	public String name;
-	public String desc;
-	public int price;
-	public int quantity;
-	public String image;
+	int id;
+	String sku;
+	String name;
+	String desc;
+	int price;
+	int quantity;
+	String image;
+	int rating;
 	
 	public Product(int id, int sku, String name, String desc, int quantity, String image) {
 		this.id = id;
-		this.sku = sku;
+		this.sku = "" + sku;
 		this.desc = desc;
 		this.name = name;
 		this.quantity = quantity;
 		this.image = image;
+		this.rating = 3;
 	}
 
 	public int getId() {
@@ -25,11 +27,11 @@ public class Product {
 		this.id = id;
 	}
 
-	public int getSku() {
+	public String getSku() {
 		return sku;
 	}
 
-	public void setSku(int sku) {
+	public void setSku(String sku) {
 		this.sku = sku;
 	}
 
@@ -71,6 +73,14 @@ public class Product {
 
 	public void setimage(String image) {
 		this.image = image;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 	
 	

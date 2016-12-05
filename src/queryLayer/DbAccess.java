@@ -156,7 +156,7 @@ public class DbAccess {
 		}
 	}
 	
-	public List<Product> getProductsBySku(String sku){
+	public Product getProductBySku(String sku){
 		String query = "SELECT * FROM PRODUCTS WHERE SKU = " + sku;
 		Connection con = connect();
 		
@@ -165,7 +165,7 @@ public class DbAccess {
 		try {
 			List<Product> prodList = getListFromResults(rs);
 			disconnect(con);
-			return prodList;
+			return prodList.get(0);
 		} catch (SQLException e) {
 			System.out.println(e);
 			disconnect(con);

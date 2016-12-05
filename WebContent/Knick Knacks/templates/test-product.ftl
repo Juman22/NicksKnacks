@@ -92,7 +92,7 @@
 			<div class="properties-box">
 				<ul class="unstyle">
 					<li><b class="propertyname">SKU:</b> ${product.sku}</li>
-					<li><b class="propertyname">Availability:</b> ${product.stock}</li>
+					<li><b class="propertyname">Availability:</b> ${product.quantity}</li>
 					<li><b class="propertyname">Rating:</b> ${product.rating}/5</li>
 					<li><b class="propertyname">Price:</b> $${product.price}</li>
 					<li><b class="propertyname">Quantity:</b>

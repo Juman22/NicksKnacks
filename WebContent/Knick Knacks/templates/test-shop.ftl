@@ -87,7 +87,7 @@
 						</p>
 						<p>
 							<a href="#" class="learn-more detailslearn"><i class="fa fa-shopping-cart"></i> Purchase</a>
-							<a href="NameOfServlet?productName=${product.name}" class="learn-more detailslearn"><i class="fa fa-link"></i> Details</a>
+							<a href="DbConnector?sku=${product.sku}" class="learn-more detailslearn"><i class="fa fa-link"></i> Details</a>
 						</p>
 					</div>
                         <span class="maxproduct"><img src="${product.image}" alt=""></span>
