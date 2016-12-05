@@ -1,6 +1,8 @@
-import java.sql.SQLException;
+package persistLayer;
+import java.sql.SQLException; 
 import java.util.ArrayList;
 import java.util.List;
+import queryLayer.DbAccess;
 
 //DbInterface contains methods for building relevant data from ResultSets
 public class DbInterface {

@@ -1,3 +1,4 @@
+package persistLayer;
 public class Product {
 	public int id;
 	public int sku;
