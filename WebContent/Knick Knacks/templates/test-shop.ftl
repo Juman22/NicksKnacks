@@ -81,9 +81,9 @@
                 <div class="productbox">
                     <div class="fadeshop">
                         <div class="captionshop text-center" style="display: none;">
-						<h3>$(product.name)</h3>
+						<h3>${product.name}</h3>
 						<p>
-							 This is a short excerpt to generally describe what the item is about.
+							 ${product.desc}
 						</p>
 						<p>
 							<a href="#" class="learn-more detailslearn"><i class="fa fa-shopping-cart"></i> Purchase</a>

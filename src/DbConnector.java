@@ -23,7 +23,7 @@ import freemarker.template.TemplateExceptionHandler;
  * Servlet implementation class DbConnector
  */
 @WebServlet("/DbConnector")
-public class AccountServlets extends HttpServlet {
+public class DbConnector extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Configuration cfg = null;
 	
@@ -32,7 +32,7 @@ public class AccountServlets extends HttpServlet {
 	/**
      * Default constructor. 
      */
-    public AccountServlets() {
+    public DbConnector() {
        
     }
 
@@ -51,6 +51,31 @@ public class AccountServlets extends HttpServlet {
 		
 		// Don't log exceptions inside FreeMarker that it will thrown at you anyway:
 		cfg.setLogTemplateExceptions(false);
+    }
+    
+    void displayResults(HttpServletRequest request, HttpServletResponse response, List<Product> rs) {	
+    	if(rs != null) {
+			Template template = null;
+			DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
+			SimpleHash root = new SimpleHash(df.build());
+			
+			root.put("products", rs);
+			
+			try {
+				String templateName = "test-shop.ftl";
+				template = cfg.getTemplate(templateName);
+				response.setContentType("text/html");
+				PrintWriter out = response.getWriter();
+				template.process(root, out);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+				
+			} catch (TemplateException e) {
+				e.printStackTrace();
+				
+			}
+    	}
     }
     
     void displayAccount(HttpServletRequest request, HttpServletResponse response, Account acct) {
@@ -78,30 +103,52 @@ public class AccountServlets extends HttpServlet {
     }
     
 	protected  void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//The actual name of these variables may change, not sure yet
+		//Need actual html page to get accurate names
+		String name = request.getParameter("name");
+		String minPrice = request.getParameter("minPrice");
+		String maxPrice = request.getParameter("maxPrice");
+		DbInterface db = new DbInterface();
 		
+		//Parse string params to ints for DbInterface
+		int min = -1, max = -1;
+		if(minPrice != null)
+			min = Integer.parseInt(minPrice);
+		if(maxPrice != null)
+			max = Integer.parseInt(maxPrice);
+		
+		List<Product> rs;
+		if(name == "" && min == -1) {
+			rs = db.getProducts();
+		}
+		else {
+			rs = db.getSearchResults(name, min, max);
+		}
+		
+		displayResults(request, response, rs);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Used for account retrieval
-		String userName = request.getParameter("userName");
-		String password = request.getParameter("password");
-		
-		//Used for account creation
-		String firstName = request.getParameter("firstName");
-		String lastName = request.getParameter("lastName");
+				String userName = request.getParameter("userName");
+				String password = request.getParameter("password");
+				
+				//Used for account creation
+				String firstName = request.getParameter("firstName");
+				String lastName = request.getParameter("lastName");
 
-		DbInterface db = new DbInterface();
+				DbInterface db = new DbInterface();
 
-		if(firstName != null) {
-			db.createAccount(userName, password, firstName, lastName);
-		}
-		
-		if(userName != "" && password != null) {
-			Account acct = db.getAccount(userName, password);
-			
-			if(acct != null)
-				displayAccount(request, response, acct);
-		}
+				if(firstName != null) {
+					db.createAccount(userName, password, firstName, lastName);
+				}
+				
+				if(userName != "" && password != null) {
+					Account acct = db.getAccount(userName, password);
+					
+					if(acct != null)
+						displayAccount(request, response, acct);
+				}
 	}
 
 }
