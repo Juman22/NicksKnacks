@@ -77,7 +77,7 @@
 	<div class="row">
 		<div class="col-md-8">
 			<div class="productbox">
-				<img src="images/product2-2.jpg" alt="">
+				<img src="${product.image}" alt="">
 				<div class="clearfix">
 				</div>
 				<br/>
