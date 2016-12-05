@@ -58,4 +58,20 @@ public class DbInterface {
 		
 		return acct;
 	}
+	
+	public void updateAccount(String userName, String pass, String firstName, String lastName) {
+		DbAccess db = new DbAccess();
+
+		if(userName != null) {
+			if(firstName != null)
+				db.updatFirstName(firstName, userName);
+			
+			if(lastName != null)
+				db.updatLastName(lastName, userName);
+			
+			if(pass != null)
+				db.updatePassword(pass, userName);
+			
+		}
+	}
 }

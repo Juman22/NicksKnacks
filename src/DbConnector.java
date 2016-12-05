@@ -117,6 +117,10 @@ public class DbConnector extends HttpServlet {
 		}
     }
     	
+    void updateAccount(Account acct) {
+    	
+    }
+    
     void displayAccount(HttpServletRequest request, HttpServletResponse response, Account acct) {
 		Template template = null;
 		DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
@@ -185,27 +189,52 @@ public class DbConnector extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Used for account retrieval
-				String userName = request.getParameter("username");
-				String password = request.getParameter("password");
-				
-				//Used for account creation
-				String firstName = request.getParameter("firstname");
-				String lastName = request.getParameter("lastname");
+		String userName = request.getParameter("username");
+		String password = request.getParameter("password");
+		String newPassword = request.getParameter("newpassword");
+		
+		//Used for account creation
+		String firstName = request.getParameter("firstname");
+		String lastName = request.getParameter("lastname");
 
-				DbInterface db = new DbInterface();
+		DbInterface db = new DbInterface();
+		System.out.println(userName + ", " + password + ", " + firstName + ", " + lastName);
 
-				if(firstName != null) {
-					db.createAccount(userName, password, firstName, lastName);
-				}
+		Account acct = db.getAccount(userName, password);
+
+		if(acct != null) {		
+			//If updating password
+			if(newPassword != null) {
+				acct.setFirstName(firstName);
+				acct.setLastName(lastName);
+				acct.setPassword(newPassword);
 				
-				if(userName != "" && password != null) {
-					Account acct = db.getAccount(userName, password);
+				db.updateAccount(userName, newPassword, firstName, lastName);
+			}
+
+			if(userName != "" && password != null) {	
+				HttpSession session = request.getSession();
+				Account activeAcct = (Account) session.getAttribute("activeAccount");
+				if(activeAcct == null)
+					setSessionAccount(request, acct);
+				
+				displayAccount(request, response, acct);
 					
-					if(acct != null) {
-						setSessionAccount(request, acct);
-						displayAccount(request, response, acct);
-					}
-				}
+			}
+			
+		} else {
+			//If making account
+			if(firstName != null && newPassword == null) {
+				db.createAccount(userName, password, firstName, lastName);	
+				acct = db.getAccount(userName, password);
+				
+				HttpSession session = request.getSession();
+				Account activeAcct = (Account) session.getAttribute("activeAccount");
+				if(activeAcct == null)
+					setSessionAccount(request, acct);
+				
+				displayAccount(request, response, acct);
+			} 
+		}
 	}
-
 }

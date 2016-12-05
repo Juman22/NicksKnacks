@@ -22,7 +22,7 @@
         <ul class="nav navbar-nav navbar-right">
             <!--Dropdown-->
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Welcome, ${username}<span class="caret"></span></a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Welcome, ${account.username}<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li>
                         <div class="profile-box container">
@@ -31,8 +31,7 @@
                                     <span><img src="images/user.png"></span>
                                 </div>
                                 <div class="col-lg-7 name-box">
-                                    <p>${firstName} ${LastName}</p>
-                                    <!--<p>${email}</p>-->
+                                    <p>${account.firstName} ${account.lastName}</p>
                                 </div>
                             </div>
                         </div>

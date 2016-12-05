@@ -205,7 +205,7 @@ public class DbAccess {
 	public Account parseAccount(ResultSet rs) {
 		try {
 			while(rs.next()) {
-				return new Account(rs.getString("username"), rs.getString("password"), rs.getString("First Name"), rs.getString("Last Name"));
+				return new Account(rs.getString("username"), rs.getString("password"), rs.getString("First_Name"), rs.getString("Last_Name"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -234,7 +234,8 @@ public class DbAccess {
 	}
 	
 	public void createAccount(String userName, String pass, String firstName, String lastName) {
-		String query = "INSERT INTO ACCOUNTS (username, password, First Name, Last Name) VALUES ('";
+		String query = "INSERT INTO ACCOUNTS (username,password,First_Name,Last_Name) VALUES ('";
+		
 		query += userName;
 		query += "', '";
 		
@@ -254,4 +255,67 @@ public class DbAccess {
 		disconnect(con);
 	}
 	
+	public void updateUserName(String newName, String userName) {
+		String query = "UPDATE ACCOUNTS SET username = '";
+		
+		query += newName;
+		query += "' WHERE username = '";
+		
+		query += userName;
+		query += "'";
+	
+		Connection con = connect();
+		
+		update(con, query);
+		
+		disconnect(con);
+	}
+	
+	public void updatePassword(String newPass, String userName) {
+		String query = "UPDATE ACCOUNTS SET password = '";
+		
+		query += newPass;
+		query += "' WHERE username = '";
+		
+		query += userName;
+		query += "'";
+	
+		Connection con = connect();
+		
+		update(con, query);
+		
+		disconnect(con);
+	}
+	
+	public void updatFirstName(String newName, String userName) {
+		String query = "UPDATE ACCOUNTS SET First_Name = '";
+		
+		query += newName;
+		query += "' WHERE username = '";
+		
+		query += userName;
+		query += "'";
+	
+		Connection con = connect();
+		
+		update(con, query);
+		
+		disconnect(con);
+	}
+	
+	public void updatLastName(String newName, String userName) {
+		String query = "UPDATE ACCOUNTS SET Last_Name = '";
+		
+		query += newName;
+		query += "' WHERE username = '";
+		
+		query += userName;
+		query += "'";
+	
+		Connection con = connect();
+		
+		update(con, query);
+		
+		disconnect(con);
+	}
 }
