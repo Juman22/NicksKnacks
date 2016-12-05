@@ -85,14 +85,16 @@
 		</div>
 	    </div>
 	    <div class="col-md-4">
-		<b class="propertyname">Sort by:</b>
-		<select name="sort">
-		    <option value="az">None</option>
-		    <option value="az">A - Z</option>
-		    <option value="za">Z - A</option>
-		    <option value="pricelohi">Price Low to High</option>
-		    <option value="pricehilo">Price High to Low</option>
-		</select>
+		<div class="form-inline">
+                    <b class="propertyname">Sort by:</b>
+                    <select name="sort" class="form-control">
+                        <option value="az">None</option>
+                        <option value="az">A - Z</option>
+                        <option value="za">Z - A</option>
+                        <option value="pricelohi">Price Low to High</option>
+                        <option value="pricehilo">Price High to Low</option>
+                    </select>
+                </div>
 	    </div>
 	    <div class="col-md-4 form-inline">
 		<input type="text" name="search" class="form-control">
