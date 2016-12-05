@@ -80,6 +80,16 @@
             <div class="col-md-4">
                 <div class="productbox">
                     <div class="fadeshop">
+                        <div class="captionshop text-center" style="display: none;">
+						<h3>$(product.name)</h3>
+						<p>
+							 This is a short excerpt to generally describe what the item is about.
+						</p>
+						<p>
+							<a href="#" class="learn-more detailslearn"><i class="fa fa-shopping-cart"></i> Purchase</a>
+							<a href="#" class="learn-more detailslearn"><i class="fa fa-link"></i> Details</a>
+						</p>
+					</div>
                         <span class="maxproduct"><img src="${product.image}" alt=""></span>
                     </div>
                     <div class="product-details">
