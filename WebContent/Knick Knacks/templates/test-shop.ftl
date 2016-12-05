@@ -149,8 +149,8 @@
 </div>
 
 <!-- Load JS here for greater good =============================-->
-<script src="js/jquery-.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/main.js"></script>
+<script src="Knick%20Knacks/js/jquery-.js"></script>
+<script src="Knick%20Knacks/js/bootstrap.min.js"></script>
+<script src="Knick%20Knacks/js/main.js"></script>
 </body>
 </html>
