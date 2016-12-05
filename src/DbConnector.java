@@ -25,7 +25,7 @@ public class DbConnector extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Configuration cfg = null;
 	
-	private String templateDir = "/WEB-INF/templates";
+	private String templateDir = "/Knick Knacks/templates";
     
 	/**
      * Default constructor. 
@@ -60,7 +60,7 @@ public class DbConnector extends HttpServlet {
 			root.put("products", rs);
 			
 			try {
-				String templateName = "shop.ftl";
+				String templateName = "test-shop.ftl";
 				template = cfg.getTemplate(templateName);
 				response.setContentType("text/html");
 				PrintWriter out = response.getWriter();
