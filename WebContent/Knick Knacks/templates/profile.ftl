@@ -65,7 +65,7 @@
 			<button data-target="#navbar-collapse-02" data-toggle="collapse" class="navbar-toggle" type="button">
 			<span class="sr-only">Toggle navigation</span>
 			</button>
-			<a href="index.html" class="navbar-brand brand"> Nick's Knacks </a>
+			<a href="/NicksKnacks/Knick%20Knacks/index.html" class="navbar-brand brand"> Nick's Knacks </a>
 		</div>
 		<div id="navbar-collapse-02" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
