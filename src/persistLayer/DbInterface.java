@@ -5,6 +5,9 @@ import java.util.List;
 import queryLayer.DbAccess;
 
 //DbInterface contains methods for building relevant data from ResultSets
+//Connects to DbAccess for SQL related functions
+//DbInterface is called from servlet (DbConnector.java)
+
 public class DbInterface {
 	//getResults for servlet
 	//Pass null values for non-fields (i.e. min = -1, name = "")

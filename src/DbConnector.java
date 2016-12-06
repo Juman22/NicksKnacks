@@ -30,13 +30,12 @@ public class DbConnector extends HttpServlet {
 	
 	private String templateDir = "/Knick Knacks/templates";
     
-	/**
-     * Default constructor. 
-     */
+	//Default constructor
     public DbConnector() {
        
     }
 
+    //Generic init function
     public void init() {
     	// Create your Configuration instance, and specify if up to what FreeMarker
     	// version (here 2.3.25) do you want to apply the fixes that are not 100%
@@ -54,6 +53,7 @@ public class DbConnector extends HttpServlet {
 		cfg.setLogTemplateExceptions(false);
     }
     
+    //Opens product page and displays the search results
     void displayResults(HttpServletRequest request, HttpServletResponse response, List<Product> rs) {	
     	if(rs != null) {
 			Template template = null;
@@ -116,11 +116,8 @@ public class DbConnector extends HttpServlet {
 			
 		}
     }
-    	
-    void updateAccount(Account acct) {
-    	
-    }
     
+    //Opens profile page
     void displayAccount(HttpServletRequest request, HttpServletResponse response, Account acct) {
 		Template template = null;
 		DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
@@ -153,16 +150,15 @@ public class DbConnector extends HttpServlet {
     	session.setAttribute("activeAccount", acct);	
     }
     
+    //Used for all services except for account related functions
 	protected  void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//The actual name of these variables may change, not sure yet
-		//Need actual html page to get accurate names
 		String name = request.getParameter("name");
 		String minPrice = request.getParameter("minPrice");
 		String maxPrice = request.getParameter("maxPrice");
 		String sku = request.getParameter("sku");
 		DbInterface db = new DbInterface();
 		
-		//If the servlet is provided a sku, it bypasses the search
+		//If the servlet is provided a sku, it bypasses the search to display the product
 		//Otherwise it populates the ftl with a product list
 		if(sku != null) {
 			Product p = db.getProductBySku(sku);
@@ -187,6 +183,7 @@ public class DbConnector extends HttpServlet {
 		}
 	}
 	
+	//Used for account related functions
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Used for account retrieval
 		String userName = request.getParameter("username");
@@ -202,6 +199,7 @@ public class DbConnector extends HttpServlet {
 
 		Account acct = db.getAccount(userName, password);
 
+		//Checks if acct exists in the database
 		if(acct != null) {		
 			//If updating password
 			if(newPassword != null) {
@@ -211,7 +209,7 @@ public class DbConnector extends HttpServlet {
 				
 				db.updateAccount(userName, newPassword, firstName, lastName);
 			}
-
+			//If logging in
 			if(userName != "" && password != null) {	
 				HttpSession session = request.getSession();
 				Account activeAcct = (Account) session.getAttribute("activeAccount");

@@ -12,9 +12,9 @@ import persistLayer.Account;
 import persistLayer.DbAccessConfiguration;
 import persistLayer.Product;
 
-
 //DbAccess class contains methods for retrieving lists from resultsets
 //The DbAccess class will never be accessed by the Servlet
+//DbAccess is called from DbInterface 
 
 public class DbAccess {
 	

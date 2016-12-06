@@ -1,9 +1,13 @@
 package persistLayer;
+
+import java.util.List;
+
 public class Account {
 	String username;
 	String password;
 	String firstName;
 	String lastName;
+	public List<Product> cart;
 	
 	public Account(String username,	String password, String firstName, String lastName) {
 		this.username = username;
@@ -42,6 +46,14 @@ public class Account {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public List<Product> getCart() {
+		return cart;
+	}
+
+	public void setCart(List<Product> cart) {
+		this.cart = cart;
 	}
 	
 }
