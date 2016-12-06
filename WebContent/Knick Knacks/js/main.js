@@ -20,11 +20,13 @@ $(document).ready(function() {
     $('#addToCart').click(function(event) {
 	event.preventDefault();    
         var params = $('span.product-prop');
+	var quantitySelected = $(".qty-product").val();    
         var product = {
             "name": params.eq(0).text(),
             "description": params.eq(1).text(),
             "skuNum": params.eq(2).text(),
-	    "price":params.eq(3).text()	
+	    "price":params.eq(3).text(),
+	    "quantity": quantitySelected	
         };
         $.ajax({
             url: "cartServlet",
