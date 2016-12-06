@@ -160,19 +160,21 @@ public class DbConnector extends HttpServlet {
 		
 		//If the servlet is provided a sku, it bypasses the search to display the product
 		//Otherwise it populates the ftl with a product list
-		if(sku != null) {
+		if(sku != null && sku != "") {
 			Product p = db.getProductBySku(sku);
-			displayProduct(request, response, p);
+			if(p != null)
+				displayProduct(request, response, p);
 		} else {
 			//Parse string params to ints for DbInterface
+			System.out.println(name + "min");
 			int min = -1, max = -1;
-			if(minPrice != null)
+			if(minPrice != null && minPrice != "null")
 				min = Integer.parseInt(minPrice);
-			if(maxPrice != null)
+			if(maxPrice != null && maxPrice != "null")
 				max = Integer.parseInt(maxPrice);
 			
 			List<Product> rs;
-			if(name == "" && min == -1) {
+			if(name == null && min == -1) {
 				rs = db.getProducts();
 			}
 			else {

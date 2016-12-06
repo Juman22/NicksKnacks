@@ -93,6 +93,7 @@ public class DbAccess {
 	public List<Product> getListFromResults(ResultSet rs) throws SQLException {
 		List<Product> prodList = new ArrayList<Product>();
 
+
 		while(rs.next()) {
 			Product p = new Product(rs.getInt("sku"), rs.getString("name"), rs.getString("description"),rs.getInt("quantity"), rs.getString("image"),rs.getInt("price"));
 			prodList.add(p);

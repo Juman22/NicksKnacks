@@ -1,6 +1,5 @@
-package mainPackage;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.uga.cs4300.persistlayer.*;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateExceptionHandler;
 import queryLayer.queryLogic;
@@ -68,7 +66,7 @@ public class accountServlets extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
         
-        Map<String, Object> root = new HashMap<>();
+        Map<String, Object> root = new HashMap<String, Object>();
         
         
         

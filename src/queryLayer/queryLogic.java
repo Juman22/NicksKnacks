@@ -1,28 +1,28 @@
 package queryLayer;
 
-import edu.uga.cs4300.persistlayer.*;
 import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import edu.uga.cs4300.persistlayer.DbAccessImpl;
-import edu.uga.cs4300.persistlayer.MoviePersistImpl;
+
+import persistLayer.DbInterface;
+import persistLayer.Product;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapperBuilder;
 import freemarker.template.SimpleHash;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 
 public class queryLogic {
 	
-    ProductPersistImpl persist = new ProductPersistImpl();
-    DbAccessImpl queryImplementor = new DbAccessImpl();
+
     Connection con;
-	
+	DbAccess queryImplementor = new DbAccess();
     public queryLogic(){
         con = queryImplementor.connect();
     }
@@ -32,7 +32,7 @@ public class queryLogic {
         String query = " ";
         query = "SELECT * from store.products";
         
-        ArrayList<Product> main = new ArrayList<>();
+        ArrayList<Product> main = new ArrayList<Product>();
 
         ResultSet result = queryImplementor.retrieve(con, query);
         
@@ -42,9 +42,9 @@ public class queryLogic {
 				int price = result.getInt("price");
 				int id = result.getInt("sku");
 				String description = result.getString("description");
-				String image = result.getString("image");
+				String image = result.getString("image"); 
 				
-				Product newProduct = new Product(name, price, id, description, image);
+				Product newProduct = new Product(id, name, description,5, image,price);
 				main.add(newProduct);
 			}
 		} catch (SQLException e) {
@@ -61,7 +61,7 @@ public class queryLogic {
         String query = " ";
         query = "SELECT * from store.profile where username = '" + username + "'";
         
-        ArrayList<Profile> main5 = new ArrayList<>();
+        ArrayList<Profile> main5 = new ArrayList<Profile>();
 
         ResultSet result = queryImplementor.retrieve(con, query);
         
@@ -94,7 +94,7 @@ public class queryLogic {
         String query = " ";
         query = "SELECT * from store.products where sku = '" + sku +"';" ;
         
-        ArrayList<Product> mainTwo = new ArrayList<>();
+        ArrayList<Product> mainTwo = new ArrayList<Product>();
 
         ResultSet result = queryImplementor.retrieve(con, query);
         
@@ -106,7 +106,7 @@ public class queryLogic {
 				String description = result.getString("description");
 				String image = result.getString("image");
 				
-				Product newProduct = new Product(name, price, id, description, image);
+				Product newProduct = new Product(id, name, description,5, image,price);
 				mainTwo.add(newProduct);
 			}
 		} catch (SQLException e) {
@@ -160,12 +160,12 @@ public class queryLogic {
         try {
             ResultSetMetaData resultOfMetaData = result.getMetaData();
             int columnCount = resultOfMetaData.getColumnCount();
-            ArrayList<String> namesOfColumns = new ArrayList<>();
+            ArrayList<String> namesOfColumns = new ArrayList<String>();
             for (int i = 1; i <= columnCount; i++) {
                 namesOfColumns.add(resultOfMetaData.getColumnName(i));
             }
             newHashMap.put("colNames", namesOfColumns);
-            ArrayList<Row> rowList = new ArrayList<>();
+            ArrayList<Row> rowList = new ArrayList<Row>();
             while (result.next()) {
                 Row newRow = new Row();
                 for (int j = 1; j <= columnCount; j++) {
@@ -273,9 +273,9 @@ public class queryLogic {
 	
     public void addAccount(String username,  String password, String firstName, String lastName) throws SQLException
     {       
-        String query = "Insert into accounts(username, password, firstname,lastname) values(("
-                + username + "," + password + "," + firstName + "," + lastName +"')'";
-        persist.runQuery(query);
+        
+        DbInterface db = new DbInterface();
+        db.createAccount(username, password, firstName, lastName);
     }
 
 }

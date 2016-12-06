@@ -2,9 +2,9 @@ package persistLayer;
 public class Product {
 	int id;
 	String sku;
-	String name;
+	public String name;
 	String desc;
-	int price;
+	public int price;
 	int quantity;
 	String image;
 	int rating;
@@ -14,7 +14,7 @@ public class Product {
 		this.desc = desc;
 		this.name = name;
 		this.price = price;
-		this.quantity = quantity;
+		this.quantity = 0;
 		this.image = image;
 		this.rating = 3;
 	}

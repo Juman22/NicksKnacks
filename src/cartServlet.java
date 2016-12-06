@@ -1,6 +1,6 @@
-package mainPackage;
 
-import java.io.IOException;
+
+import java.io.IOException; 
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import persistLayer.DbInterface;
+import persistLayer.Product;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateExceptionHandler;
 import queryLayer.*;
@@ -22,11 +24,10 @@ import queryLayer.*;
 public class cartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	queryLogic queryLayerMain = new queryLogic();
     Configuration cfg = null;
     
-    private String templateDir = "/WEB-INF/templates";
-	
+    private String templateDir = "/Knick Knacks/templates";
+	queryLogic queryLayerMain = new queryLogic();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -58,30 +59,38 @@ public class cartServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		init();
 		Cart cart;
 		Map<String, Object> newRoot;
 		
 		String name = request.getParameter("name");
-		int price = Integer.parseInt(request.getParameter("price"));
-		System.out.println(price);
-//		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		int price = 0;
+		String priceString = request.getParameter("price");
+		if(priceString != "" && priceString != null) {
+			price = Integer.parseInt(request.getParameter("price"));
+		}
+		String quantityString = request.getParameter("quantity");
+		int quantity = 2;
+		if(quantityString != "" && quantityString != null)
+			quantity = Integer.parseInt(quantityString);
+		int sku = 0;
         String skuNum = request.getParameter("skuNum");
-        int sku = Integer.parseInt(skuNum.replaceAll(",", ""));
-        
+        if(skuNum != "" && skuNum != null)
+        sku = Integer.parseInt(skuNum.replaceAll(",", ""));
 		String description = request.getParameter("description");
-		Product prod = new Product(name, price, sku, description, " ");
+
+		Product prod = new Product(sku, name, description, quantity, " ", price);
 		
     	HttpSession session = request.getSession();    	
     	cart = (Cart) session.getAttribute("products");	
     	
     	if(cart != null){
-	    	cart.addToCart(prod);
+	    	cart.addToCart(prod,quantity);
 	    	setSessionCart(request, cart);
     	}else{
     		cart = new Cart();
-	    	cart.addToCart(prod);
+	    	cart.addToCart(prod,quantity);
 	    	setSessionCart(request, cart);
     	}
     	
