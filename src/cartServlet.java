@@ -79,24 +79,34 @@ public class cartServlet extends HttpServlet {
         if(skuNum != "" && skuNum != null)
         sku = Integer.parseInt(skuNum.replaceAll(",", ""));
 		String description = request.getParameter("description");
-
-		Product prod = new Product(sku, name, description, quantity, " ", price);
 		
-    	HttpSession session = request.getSession();    	
+		HttpSession session = request.getSession();    	
     	cart = (Cart) session.getAttribute("products");	
     	
-    	if(cart != null){
-	    	cart.addToCart(prod,quantity);
-	    	setSessionCart(request, cart);
-    	}else{
+		if(name != "" && name != null) {
+			Product prod = new Product(sku, name, description, quantity, " ", price);
+			if(cart != null){
+		    	cart.addToCart(prod,quantity);
+		    	setSessionCart(request, cart);
+	    	}else{
+	    		cart = new Cart();
+		    	cart.addToCart(prod,quantity);
+		    	setSessionCart(request, cart);
+	    	}
+		}
+    	
+    	
+    	
+    	
+    	
+    	if(cart != null)
+    		newRoot = cart.getCart(); 
+    	else {
     		cart = new Cart();
-	    	cart.addToCart(prod,quantity);
 	    	setSessionCart(request, cart);
+	    	newRoot = cart.getCart();
     	}
     	
-    	
-    	
-    	newRoot = cart.getCart();   	    	
     	queryLayerMain.displayResults(response, newRoot, cfg);
     	
     	
