@@ -88,56 +88,17 @@
 			</div>
 		</div>
 		<div class="col-md-4">
+		     <a href="" class="btn btn-buynow" id="addToCart">Add to Cart</a>	
 			<div class="properties-box">
 				<ul class="unstyle">
 					<li><b class="propertyname">SKU:</b> ${product.sku}</li>
 					<li><b class="propertyname">Availability:</b> ${product.quantity}</li>
 					<li><b class="propertyname">Rating:</b> ${product.rating}/5</li>
 					<li><b class="propertyname">Price:</b> ${product.price}</li>
-					<li><b class="propertyname">Quantity:</b>
-                        <input type="number" min="0" name="quantity">
-                    </li>
-				</ul>
-				<form id = "stuff"action="" method="post">
-                    <div class="container">
-                        <div class="form-group row">
-                            <label for="" class="col-md-1 col-form-label">Username</label>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" name="skuNum" placeholder="${product.sku}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="" class="col-md-1 col-form-label">Password</label>
-                          <div class="col-md-4">
-                                <input type="text" class="form-control" name="name" placeholder="${product.name}">
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="offset-md-2 col-md-6">
-                                <input type="text" class="form-control" name="image" placeholder="${product.image}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="offset-md-2 col-md-6">
-                                <input type="text" class="form-control" name="description" placeholder="${product.desc}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="offset-md-2 col-md-6">
-                                <input type="text" class="form-control" name="quantity" placeholder="${product.quantity}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="offset-md-2 col-md-6">
-                                <input type="text" class="form-control" name="price" placeholder="${product.price}">
-                            </div>
-                        </div>
-                    </div>    
-                </form>
+					<li><b class="propertyname">Quantity:</b><input type="number" min="0" name="quantity"</li>
+				</ul>	
 			</div>
-			<a href="#" onclick = "document.getElementById('stuff').submit();"class="btn btn-buynow">Add to Cart</a>
 		</div>
-	</div>
 </div>
 </section>
 
