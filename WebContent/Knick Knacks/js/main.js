@@ -16,4 +16,16 @@ $(document).ready(function() {
         });
         
     });
+	
+    $('#addToCart').click(function() {
+        var params = $('span.product-prop');
+        var product = {
+            "name": params[0],
+            "skuNum": params[1],
+            "price": params[4]
+        };
+        $.ajax({
+            url: "cartServlet", data: product, success: function(result) {alert('Success');}
+        });
+    });		
 });
