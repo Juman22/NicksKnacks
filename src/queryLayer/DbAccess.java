@@ -140,7 +140,7 @@ public class DbAccess {
 	
 	public List<Product> getProductsByName(String name, int min, int max){
 		String query = "SELECT * FROM PRODUCTS WHERE NAME LIKE '%" + name + "%'";
-		query += " PRICE BETWEEN " + min + " AND " + max;
+		query += " AND PRICE BETWEEN " + min + " AND " + max;
 		Connection con = connect();
 		
 		ResultSet rs = retrieve(con, query);

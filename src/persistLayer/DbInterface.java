@@ -14,11 +14,11 @@ public class DbInterface {
 	public List<Product> getSearchResults(String name, int min, int max) {
 		List<Product> rs = new ArrayList<Product>();
 		DbAccess db = new DbAccess();
-		
-		if(name != "" && min < 0) {
+
+		if(name != null && name != "" && min < 0) {
 			rs = db.getProductsByName(name);			
 		}
-		else if(name == "" && min > 0) {
+		else if(min > 0 && (name == null || name == "")) {
 			rs = db.getProductsByPriceRange(min, max);
 		} 
 		else {

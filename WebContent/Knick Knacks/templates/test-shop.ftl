@@ -79,7 +79,7 @@
 	</div>
 	
     <div class="container">
-	<form action="" method="post">
+	<form action="DbConnector" method="GET">
 	    <div class="col-md-4">
 		<b class="propertyname">Filter by:</b>
 		<div class="form-inline row">
@@ -101,7 +101,7 @@
                 </div>
 	    </div>
 	    <div class="col-md-4 form-inline">
-		<input type="text" name="search" class="form-control">
+		<input type="text" name="name" class="form-control">
 		<button type="submit" class="btn btn-primary">Search</button> 
 	    </div>
 	</form>

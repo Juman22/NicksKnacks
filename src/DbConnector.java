@@ -153,11 +153,11 @@ public class DbConnector extends HttpServlet {
     //Used for all services except for account related functions
 	protected  void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");
-		String minPrice = request.getParameter("minPrice");
-		String maxPrice = request.getParameter("maxPrice");
+		String minPrice = request.getParameter("pricemin");
+		String maxPrice = request.getParameter("pricemax");
 		String sku = request.getParameter("sku");
 		DbInterface db = new DbInterface();
-		
+
 		//If the servlet is provided a sku, it bypasses the search to display the product
 		//Otherwise it populates the ftl with a product list
 		if(sku != null && sku != "") {
@@ -166,15 +166,14 @@ public class DbConnector extends HttpServlet {
 				displayProduct(request, response, p);
 		} else {
 			//Parse string params to ints for DbInterface
-			System.out.println(name + "min");
 			int min = -1, max = -1;
 			if(minPrice != null && minPrice != "null")
 				min = Integer.parseInt(minPrice);
 			if(maxPrice != null && maxPrice != "null")
 				max = Integer.parseInt(maxPrice);
-			
 			List<Product> rs;
-			if(name == null && min == -1) {
+
+			if((name == null || name == "") && min == -1) {
 				rs = db.getProducts();
 			}
 			else {
