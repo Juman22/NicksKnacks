@@ -82,7 +82,7 @@
 				<br/>
 				<div class="product-details text-left">
 					<p>
-						${product.desc}
+						<span class="product-prop">${product.desc}</span>
 					</p>
 				</div>
 			</div>
