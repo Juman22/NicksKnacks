@@ -28,8 +28,8 @@ $(document).ready(function() {
 	    "quantity": quantitySelected	
         };
         $.ajax({
-            url: "cartServlet",
-            type: "GET",
+            url: "/NicksKnacks/cartServlet?",
+            type: "get",
             data: product, 
             success: function(result) {console.log("Successful");}
         });
