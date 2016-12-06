@@ -100,7 +100,7 @@
 				</thead>
 				<tbody>
 				<#list products as product>
-				<tr class="edd_cart_item" id="edd_cart_item_0_25" data-download-id="25">
+				<tr class="edd_cart_item">
 					<td class="edd_cart_item_name">
 						<span class="edd_checkout_cart_item_title">
 							<a href="DbConnector?sku=${product.sku}">${product.name}</a>
