@@ -63,7 +63,7 @@
 <div class="container toparea">
 	<div class="underlined-title">
 		<div class="editContent">
-			<h1 class="text-center latestitems">${product.name}</h1>
+			<h1 class="text-center latestitems"><span class="product-prop">${product.name}</span></h1>
 		</div>
 		<div class="wow-hr type_short">
 			<span class="wow-hr-h">
@@ -91,10 +91,10 @@
 		     <a href="" class="btn btn-buynow" id="addToCart">Add to Cart</a>	
 			<div class="properties-box">
 				<ul class="unstyle">
-					<li><b class="propertyname">SKU:</b> ${product.sku}</li>
+					<li><b class="propertyname">SKU:</b> <span class="product-prop">${product.sku}</span></li>
 					<li><b class="propertyname">Availability:</b> ${product.quantity}</li>
 					<li><b class="propertyname">Rating:</b> ${product.rating}/5</li>
-					<li><b class="propertyname">Price:</b> ${product.price}</li>
+					<li><b class="propertyname">Price:</b><span class="product-prop">${product.price}</span></li>
 					<li><b class="propertyname">Quantity:</b><input type="number" min="0" name="quantity"</li>
 				</ul>	
 			</div>
