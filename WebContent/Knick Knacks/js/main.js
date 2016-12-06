@@ -17,8 +17,7 @@ $(document).ready(function() {
         
     });
 	
-    $('#addToCart').click(function(event) {
-	event.preventDefault();    
+    $('#addToCart').click(function() {    
         var params = $('span.product-prop');
 	var quantitySelected = $(".qty-product").val();    
         var product = {
