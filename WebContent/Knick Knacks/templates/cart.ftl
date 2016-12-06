@@ -36,15 +36,19 @@
 		</div>
 		<div id="navbar-collapse-02" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li class="propClone"><a href="index.html">Home</a></li>
-				<li class="propClone"><a href="/NicksKnacks/DbConnector?">Shop</a></li>
-				<li class="propClone"><a href="/NicksKnacks/cartServlet?">Checkout</a></li>
-				<li class="propClone"><a href="contact.html">Contact</a></li>
+				<li class="propClone"><a href="/NicksKnacks/Knick%20Knacks/index.html">Home</a></li>
 				<li class="propClone">
-				    <a href="/NicksKnacks/cartServlet?">
-					<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-				    </a>
-				</li>
+					
+				<!--Which servlet does this form need to point to? DbConnector?-->	
+				<a href="/NicksKnacks/DbConnector?">Shop</a></li>
+				<li class="propClone"><a href="/NicksKnacks/cartServlet?">Checkout</a></li>
+				<li class="propClone"><a href="/NicksKnacks/Knick%20Knacks/contact.html">Contact</a></li>
+                <li class="propClone">
+                    <a class="side-cart-trigger" href="/NicksKnacks/cartServlet?">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    </a>
+                </li>
+                
 			</ul>
 		</div>
 	</div>
