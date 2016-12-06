@@ -95,7 +95,19 @@
 					<li><b class="propertyname">Availability:</b> ${product.quantity}</li>
 					<li><b class="propertyname">Rating:</b> ${product.rating}/5</li>
 					<li><b class="propertyname">Price:</b><span class="product-prop">${product.price}</span></li>
-					<li><b class="propertyname">Quantity:</b><input type="number" min="0" name="quantity"</li>
+					<li><b class="propertyname">Quantity: </b><select name="quantity" class="qty-product">
+  							   <option value="1">1</option>
+  							   <option value="2">2</option>
+  							   <option value="3">3</option>
+  							   <option value="4">4</option>
+							   <option value="5">5</option>
+							   <option value="6">6</option>
+							   <option value="7">7</option>
+							   <option value="8">8</option>
+							   <option value="9">9</option>
+							   <option value="10">10</option>
+							</select>
+					</li>
 				</ul>	
 			</div>
 		</div>
