@@ -22,8 +22,9 @@ $(document).ready(function() {
         var params = $('span.product-prop');
         var product = {
             "name": params.eq(0).text(),
-            "skuNum": params.eq(1).text(),
-            "price": params.eq(2).text()
+            "description": params.eq(1).text(),
+            "skuNum": params.eq(2).text(),
+	    "price":params.eq(3).text()	
         };
         $.ajax({
             url: "cartServlet",
