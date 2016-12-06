@@ -38,8 +38,13 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="propClone"><a href="index.html">Home</a></li>
 				<li class="propClone"><a href="shop.html">Shop</a></li>
-				<li class="propClone"><a href="checkout.html">Checkout</a></li>
+				<li class="propClone"><a href="/NicksKnacks/cartServlet?">Checkout</a></li>
 				<li class="propClone"><a href="contact.html">Contact</a></li>
+				<li class="propClone">
+				    <a class="side-cart-trigger" href="/NicksKnacks/cartServlet?">
+					<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+				    </a>
+				</li>
 			</ul>
 		</div>
 	</div>
