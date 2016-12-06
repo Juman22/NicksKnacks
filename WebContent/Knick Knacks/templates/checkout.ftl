@@ -101,7 +101,7 @@
 						<span class="edd_checkout_cart_item_title">${product.name}</span>
 					</td>
 					<td class="edd_cart_item_price">
-						 $${product.price}
+						 ${product.price}
 					</td>
 					<td class="edd_cart_actions">
 						<a class="edd_cart_remove_item_btn" href="#">Remove</a>
