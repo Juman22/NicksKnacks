@@ -83,7 +83,7 @@ public class cartServlet extends HttpServlet {
 		HttpSession session = request.getSession();    	
     	cart = (Cart) session.getAttribute("products");	
     	
-    	System.out.println("name" + name);
+    	System.out.println("name" + quantity);
     	
 		if(name != "" && name != null) {
 			Product prod = new Product(sku, name, description, quantity, " ", price);

@@ -14,7 +14,7 @@ public class Product {
 		this.desc = desc;
 		this.name = name;
 		this.price = price;
-		this.quantity = 0;
+		this.quantity = quantity;
 		this.image = image;
 		this.rating = 3;
 	}

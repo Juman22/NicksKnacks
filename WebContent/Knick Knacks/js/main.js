@@ -29,7 +29,7 @@ $(document).ready(function() {
         };
         $.ajax({
             url: "/NicksKnacks/cartServlet?",
-            type: "get",
+            type: "GET",
             data: product, 
             success: function(result) {console.log("Successful");}
         });
