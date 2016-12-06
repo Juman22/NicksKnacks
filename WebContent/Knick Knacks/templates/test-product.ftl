@@ -93,7 +93,7 @@
 			</div>
 		</div>
 		<div class="col-md-4">
-		     <a href="" class="btn btn-buynow" id="addToCart">Add to Cart</a>	
+		     <a href="/NicksKnacks/cartServlet?" class="btn btn-buynow" id="addToCart">Add to Cart</a>	
 			<div class="properties-box">
 				<ul class="unstyle">
 					<li><b class="propertyname">SKU:</b> <span class="product-prop">${product.sku}</span></li>
