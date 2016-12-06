@@ -20,12 +20,15 @@ $(document).ready(function() {
     $('#addToCart').click(function() {
         var params = $('span.product-prop');
         var product = {
-            "name": params[0],
-            "skuNum": params[1],
-            "price": params[4]
+            "name": params.eq(0).text(),
+            "skuNum": params.eq(1).text(),
+            "price": params.eq(2).text()
         };
         $.ajax({
-            url: "cartServlet", data: product, success: function(result) {alert('Success');}
+            url: "cartServlet",
+            type: "GET",
+            data: product, 
+            success: function(result) {console.log("Successful");}
         });
     });		
 });
