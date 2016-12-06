@@ -94,7 +94,7 @@ public class DbAccess {
 		List<Product> prodList = new ArrayList<Product>();
 
 		while(rs.next()) {
-			Product p = new Product(rs.getInt("id"),rs.getInt("sku"), rs.getString("name"), rs.getString("description"),rs.getInt("quantity"), rs.getString("image"));
+			Product p = new Product(rs.getInt("sku"), rs.getString("name"), rs.getString("description"),rs.getInt("quantity"), rs.getString("image"),rs.getInt("price"));
 			prodList.add(p);
 		}
 		

@@ -1,4 +1,4 @@
-package mainPackage;
+
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import persistLayer.Cart;
+import persistLayer.Product;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateExceptionHandler;
 import queryLayer.*;
@@ -22,7 +24,6 @@ import queryLayer.*;
 public class cartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	queryLogic queryLayerMain = new queryLogic();
     Configuration cfg = null;
     
     private String templateDir = "/WEB-INF/templates";
@@ -64,13 +65,12 @@ public class cartServlet extends HttpServlet {
 		
 		String name = request.getParameter("productName");
 		int price = Integer.parseInt(request.getParameter("price"));
-//		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
         String skuNum = request.getParameter("skuNum");
         int sku = Integer.parseInt(skuNum.replaceAll(",", ""));
-        
+        String image = request.getParameter("image");
 		String description = request.getParameter("description");
-		Product prod = new Product(name, price, sku, description, " ");
-		
+		Product prod = new Product(sku, name, description, quantity, image, price);
     	HttpSession session = request.getSession();    	
     	cart = (Cart) session.getAttribute("activeCart");	
     	
@@ -82,15 +82,9 @@ public class cartServlet extends HttpServlet {
 	    	cart.addToCart(prod);
 	    	setSessionCart(request, cart);
     	}
-    	
-    	Map<String, Object> newRoot;
-    	
-    	newRoot = cart.getCart();
-    	    	
-    	queryLayerMain.displayResults(request, response, newRoot, cfg);
-    	
-    	
-		
+    	    	    	    	
+    	DbConnector db = new DbConnector();
+    	db.displayResults(request, response, cart.getCart());	
 	}
 
 	/**

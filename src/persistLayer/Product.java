@@ -9,11 +9,11 @@ public class Product {
 	String image;
 	int rating;
 	
-	public Product(int id, int sku, String name, String desc, int quantity, String image) {
-		this.id = id;
+	public Product(int sku, String name, String desc, int quantity, String image, int price) {
 		this.sku = "" + sku;
 		this.desc = desc;
 		this.name = name;
+		this.price = price;
 		this.quantity = quantity;
 		this.image = image;
 		this.rating = 3;
