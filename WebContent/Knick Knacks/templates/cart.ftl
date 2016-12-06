@@ -134,7 +134,7 @@
 				</tr>
 				<tr class="edd_cart_footer_row">
 					<th colspan="5" class="edd_cart_total">
-						 Total: <span class="edd_cart_amount">$${carttotal}</span>
+						 Total: <span class="edd_cart_amount">$${total}</span>
 					</th>
 				</tr>
 				</tfoot>

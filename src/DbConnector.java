@@ -167,9 +167,9 @@ public class DbConnector extends HttpServlet {
 		} else {
 			//Parse string params to ints for DbInterface
 			int min = -1, max = -1;
-			if(minPrice != null && minPrice != "null")
+			if(minPrice != null && minPrice != "")
 				min = Integer.parseInt(minPrice);
-			if(maxPrice != null && maxPrice != "null")
+			if(maxPrice != null && maxPrice != "")
 				max = Integer.parseInt(maxPrice);
 			List<Product> rs;
 
