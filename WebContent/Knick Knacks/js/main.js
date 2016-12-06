@@ -17,7 +17,8 @@ $(document).ready(function() {
         
     });
 	
-    $('#addToCart').click(function() {
+    $('#addToCart').click(function(event) {
+	event.preventDefault();    
         var params = $('span.product-prop');
         var product = {
             "name": params.eq(0).text(),
