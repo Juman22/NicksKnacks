@@ -56,6 +56,39 @@ public class queryLogic {
         
     }
     
+    public void getAccountInfo(Map<String, Object> newHashMap, String username)
+    {
+        String query = " ";
+        query = "SELECT * from store.profile where username = '" + username + "'";
+        
+        ArrayList<Profile> main5 = new ArrayList<>();
+
+        ResultSet result = queryImplementor.retrieve(con, query);
+        
+        try {
+			while(result.next()){
+				String userName = result.getString("username");
+				String firstName = result.getString("firstname");
+				String lastName = result.getString("lastname");
+				String address = result.getString("Address");
+				String phone = result.getString("phone");
+				String city = result.getString("city");
+				String state = result.getString("state");
+				int zipcode = result.getInt("zipcode");
+				String email = result.getString("email");
+				
+				Profile newProfile = new Profile(userName, firstName, lastName, address, city, state, zipcode, phone, email);
+				main5.add(newProfile);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        newHashMap.put("profiles", main5);
+        
+    }
+    
     public void getProductDetails(Map<String, Object> newHashMap, int sku)
     {
         String query = " ";
@@ -190,6 +223,25 @@ public class queryLogic {
 	        Template temp2 = null;
 
 	        temp2 = cfg.getTemplate("product.ftl");
+
+	        temp2.process(root2, out2);
+	
+	    }catch (TemplateException e) {
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	   
+	}
+  }
+	
+	public void deployProfile(HttpServletResponse response, Map<String, Object> root2, Configuration cfg) {
+		
+	    response.setContentType("text/html");
+	    try {
+	        PrintWriter out2 = response.getWriter();
+	        Template temp2 = null;
+
+	        temp2 = cfg.getTemplate("profile.ftl");
 
 	        temp2.process(root2, out2);
 	
