@@ -94,6 +94,9 @@
 					<th class="edd_cart_item_price">
 						 Item Price
 					</th>
+					<th>
+						 Quantity
+					</th>
 					<th class="edd_cart_actions">
 						 Actions
 					</th>
@@ -110,6 +113,9 @@
 					</td>
 					<td class="edd_cart_item_price">
 						 $${product.price}
+					</td>
+					<td>
+						 <input type="number" min="1" value="${product.quantity}">
 					</td>
 					<td class="edd_cart_actions">
 						<a class="edd_cart_remove_item_btn" href="#">Remove</a>
