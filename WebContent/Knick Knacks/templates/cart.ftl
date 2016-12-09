@@ -107,15 +107,11 @@
 				<tr class="edd_cart_item">
 					<td class="edd_cart_item_name">
 						<span class="edd_checkout_cart_item_title">
-							<a href="DbConnector?sku=${product.sku}">${product.name}</a>
+							<a class="cart-item-name" href="DbConnector?sku=${product.sku}">${product.name}</a>
 						</span>
 					</td>
-					<td class="edd_cart_item_price">
-						 $${product.price}
-					</td>
-					<td>
-						 <input type="number" min="1" value="${product.quantity}">
-					</td>
+					<td class="edd_cart_item_price">$${product.price}</td>
+					<td><input type="number" min="1" value="${product.quantity}"></td>
 					<td class="edd_cart_actions">
 						<a class="edd_cart_remove_item_btn" href="#">Remove</a>
 					</td>
