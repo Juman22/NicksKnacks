@@ -22,14 +22,14 @@ public class Cart {
 	}
 	
 	public void addToCart(Product newProd, int quantity){
-		this.total += newProd.price;
+		this.total += newProd.price * quantity;
 		price = newProd.price;
 		name = newProd.name;
 			
 		boolean found = false;
 		for(Product p : mainTwo){
 			if(p.getSku().equals(newProd.getSku())) {
-				p.setQuantity(p.getQuantity() + quantity);
+				p.setQuantity(quantity);
 				found = true;
 			}	
 		}

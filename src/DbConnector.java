@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -144,6 +145,29 @@ public class DbConnector extends HttpServlet {
     	
     }
     
+  //Opens profile page
+    void displayError(HttpServletRequest request, HttpServletResponse response) {
+		Template template = null;
+		DefaultObjectWrapperBuilder df = new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_25);
+		SimpleHash root = new SimpleHash(df.build());
+		
+		try {
+			String templateName = "error.ftl";
+			template = cfg.getTemplate(templateName);
+			response.setContentType("text/html");
+			PrintWriter out = response.getWriter();
+			template.process(root, out);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+			
+		} catch (TemplateException e) {
+			e.printStackTrace();
+			
+		}
+    	
+    }
+    
     //Sets the session account variable
     void setSessionAccount(HttpServletRequest request, Account acct) {
     	HttpSession session = request.getSession();
@@ -194,9 +218,9 @@ public class DbConnector extends HttpServlet {
 		//Used for account creation
 		String firstName = request.getParameter("firstname");
 		String lastName = request.getParameter("lastname");
+		String confirm = request.getParameter("confirm");
 
 		DbInterface db = new DbInterface();
-		System.out.println(userName + ", " + password + ", " + firstName + ", " + lastName);
 
 		Account acct = db.getAccount(userName, password);
 
@@ -211,14 +235,16 @@ public class DbConnector extends HttpServlet {
 				db.updateAccount(userName, newPassword, firstName, lastName);
 			}
 			//If logging in
-			if(userName != "" && password != null) {	
-				HttpSession session = request.getSession();
-				Account activeAcct = (Account) session.getAttribute("activeAccount");
-				if(activeAcct == null)
-					setSessionAccount(request, acct);
-				
-				displayAccount(request, response, acct);
+			if(userName != "" && password != null) {
+				if(acct.getPassword().equals(password)) {
+					System.out.println("test");
+					HttpSession session = request.getSession();
+					Account activeAcct = (Account) session.getAttribute("activeAccount");
+					if(activeAcct == null)
+						setSessionAccount(request, acct);
 					
+					displayAccount(request, response, acct);
+				}
 			}
 			
 		} else {
@@ -233,7 +259,10 @@ public class DbConnector extends HttpServlet {
 					setSessionAccount(request, acct);
 				
 				displayAccount(request, response, acct);
-			} 
+			} else {
+				//Load error page
+				displayError(request, response);
+			}
 		}
 	}
 }

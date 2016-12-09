@@ -33,5 +33,23 @@ $(document).ready(function() {
             data: product, 
             success: function(result) {console.log("Successful");}
         });
-    });		
+    });	
+    
+    $('#addToCart').click(function() {    
+        var params = $('span.product-prop');
+        var quantitySelected = $(".qty-product").val();    
+        var product = {
+            "name": params.eq(0).text(),
+            "description": params.eq(1).text(),
+            "skuNum": params.eq(2).text(),
+	    "price":params.eq(3).text(),
+	    "quantity": quantitySelected	
+        };
+        $.ajax({
+            url: "/NicksKnacks/cartServlet?",
+            type: "GET",
+            data: product, 
+            success: function(result) {console.log("Successful");}
+        });
+    });
 });
